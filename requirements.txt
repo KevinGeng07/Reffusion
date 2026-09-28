@@ -1,0 +1,10 @@
+django
+djangorestframework
+django-cors-headers
+pillow
+redis
+pyyaml
+torch
+diffusers
+transformers
+accelerate

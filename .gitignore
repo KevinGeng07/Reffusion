@@ -1,0 +1,27 @@
+# Python
+env/
+__pycache__/
+*.pyc
+
+# Node
+frontend/node_modules/
+frontend/build/
+
+# Django
+reffusion_data/db.sqlite3
+reffusion_data/media/
+
+# Downloaded model weights and caches - large, regenerated automatically
+hf_cache/
+benchmark/hf_cache/
+benchmark/aesthetic-predictor.pth
+benchmark/benchmark_output/
+
+# Generated benchmark images - large binary output, not needed to
+# reproduce or read the results (CSVs, summary.json, and the plots stay
+# tracked)
+benchmark/output/images/
+benchmark/output_two_stage/images/
+
+*.log
+.DS_Store
