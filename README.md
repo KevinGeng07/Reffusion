@@ -1,5 +1,7 @@
 # Reffusion
 
+![Stage1 vs stage2 samples](benchmark/plots/cover_image.png)
+
 Reffusion is a chat style web app for generating images from text prompts. A user creates a chat, picks a diffusion model, and sends prompts. From the second message onward, the previous image can be used as a conditioning input, so a chat becomes a sequence of image edits rather than one shot generations. The backend is a Django REST API with token authentication and per account chat history. The frontend is a small Vue 3 and TypeScript app built with Vite.
 
 The `benchmark` directory is a separate, standalone project that grew out of a simple question: of the diffusion models the app supports, which one actually produces the best images, and at what speed cost? It does not import anything from the Django app. It keeps its own copy of the model registry so it can be run and reasoned about on its own.
@@ -51,6 +53,17 @@ python run_benchmark_two_stage.py --output-dir ./output_two_stage
 Both scripts accept `--models` to run a subset, and write a CSV of per image results, a CSV of per prompt diversity stats, and a `summary.json` with the aggregated numbers. A crash partway through only aborts the model that was running; results already written for other models are kept and merged back in on the next run.
 
 ## Results
+
+Aggregate results per model, one pass being plain text to image generation and two pass being that same image refined with img2img. FLOPs for one pass is that stage's own cost; FLOPs for two pass is stage one plus stage two combined, since reaching a refined image requires generating it first. CLIP, aesthetic, and LPIPS are each stage's own measured values, averaged across all five prompts and 100 seeds.
+
+| Model | FLOPs | CLIP | Aesthetic | LPIPS |
+|---|---|---|---|---|
+| sd-turbo 1-pass | 5.2T | 22.49 | 6.10 | 0.625 |
+| sd-turbo 2-pass | 10.9T | 22.13 | 6.23 | 0.635 |
+| sdxl-turbo 1-pass | 8.7T | 22.92 | 6.12 | 0.593 |
+| sdxl-turbo 2-pass | 17.0T | 23.17 | 6.07 | 0.614 |
+| dreamshaper-lcm 1-pass | 11.7T | 22.62 | 6.11 | 0.616 |
+| dreamshaper-lcm 2-pass | 25.8T | 21.96 | 6.07 | 0.650 |
 
 CLIP score by prompt, for the three models that ran the full single stage benchmark on this hardware:
 
