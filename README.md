@@ -58,12 +58,14 @@ Aggregate results per model, one pass being plain text to image generation and t
 
 | Model | FLOPs | CLIP | Aesthetic | LPIPS |
 |---|---|---|---|---|
-| sd-turbo 1-pass | 5.2T | 22.49 | 6.10 | 0.625 |
+| sd-turbo | 5.2T | 22.49 | 6.10 | 0.625 |
 | sd-turbo 2-pass | 10.9T | 22.13 | 6.23 | 0.635 |
-| sdxl-turbo 1-pass | 8.7T | 22.92 | 6.12 | 0.593 |
+| sdxl-turbo | 8.7T | 22.92 | 6.12 | 0.593 |
 | sdxl-turbo 2-pass | 17.0T | 23.17 | 6.07 | 0.614 |
-| dreamshaper-lcm 1-pass | 11.7T | 22.62 | 6.11 | 0.616 |
+| dreamshaper-lcm | 11.7T | 22.62 | 6.11 | 0.616 |
 | dreamshaper-lcm 2-pass | 25.8T | 21.96 | 6.07 | 0.650 |
+
+The "2-pass" models use image conditioning with the single-pass model output with updated prompting, and thus includes compute for two iterations of the model to run.
 
 CLIP score by prompt, for the three models that ran the full single stage benchmark on this hardware:
 
