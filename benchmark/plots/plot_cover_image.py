@@ -62,6 +62,14 @@ for row, (model, samples) in enumerate(ROWS):
     fig.text(row_left - pad, row_top + pad + LABEL_OFFSET, model, ha='left', va='bottom',
               fontsize=12, fontweight='bold', color=COLORS[model])
 
+CAPTION = (
+    'Figure 1. Left column of each image pair is the prompt-only pass, '
+    'right column is same seed conditioned on the first pass.'
+)
+BOTTOM_GAP = 0.06
+fig.text(0.5, row_bottom - BOTTOM_GAP, CAPTION, ha='center', va='top',
+          fontsize=9, style='italic', wrap=True)
+
 out_path = Path(__file__).parent / 'cover_image.png'
 fig.savefig(out_path, dpi=150, bbox_inches='tight')
 print(f'Wrote {out_path}')
