@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 from PIL import Image
 
-IMAGES_DIR = Path(__file__).parent.parent / 'output_two_stage' / 'images'
+SAMPLE_IMAGES_DIR = Path(__file__).parent.parent.parent / 'output_two_stage' / 'images'
 # ColorBrewer "Dark2", same mapping used in the other plots.
 COLORS = {'sd-turbo': '#1B9E77', 'sdxl-turbo': '#D95F02', 'dreamshaper-lcm': '#7570B3'}
 
@@ -39,7 +39,7 @@ for row, (model, samples) in enumerate(ROWS):
     x = row_left
     for prompt_slug, seed in samples:
         stage1_ax = fig.add_axes([x, row_bottom, IMG_W, ROW_H])
-        stage1_ax.imshow(Image.open(IMAGES_DIR / model / prompt_slug / f'stage1_seed_{seed}.png'))
+        stage1_ax.imshow(Image.open(SAMPLE_IMAGES_DIR / model / prompt_slug / f'stage1_seed_{seed}.png'))
         stage1_ax.axis('off')
         x += IMG_W
 
@@ -49,7 +49,7 @@ for row, (model, samples) in enumerate(ROWS):
         x += ARROW_GAP
 
         stage2_ax = fig.add_axes([x, row_bottom, IMG_W, ROW_H])
-        stage2_ax.imshow(Image.open(IMAGES_DIR / model / prompt_slug / f'stage2_seed_{seed}.png'))
+        stage2_ax.imshow(Image.open(SAMPLE_IMAGES_DIR / model / prompt_slug / f'stage2_seed_{seed}.png'))
         stage2_ax.axis('off')
         x += IMG_W + SAMPLE_GAP
 
@@ -70,6 +70,6 @@ BOTTOM_GAP = 0.06
 fig.text(0.5, row_bottom - BOTTOM_GAP, CAPTION, ha='center', va='top',
           fontsize=9, style='italic', wrap=True)
 
-out_path = Path(__file__).parent / 'cover_image.png'
+out_path = Path(__file__).parent.parent / 'images' / 'cover_image.png'
 fig.savefig(out_path, dpi=150, bbox_inches='tight')
 print(f'Wrote {out_path}')

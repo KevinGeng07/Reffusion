@@ -8,7 +8,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 
-RESULTS_CSV = Path(__file__).parent.parent / 'output' / 'per_image_results.csv'
+RESULTS_CSV = Path(__file__).parent.parent.parent / 'output' / 'per_image_results.csv'
 PROMPTS = ['car', 'caucasian male', 'city landscape', 'northern lights', 'television with show playing']
 MODELS = ['sd-turbo', 'sdxl-turbo', 'dreamshaper-lcm']
 # ColorBrewer "Dark2" - muted, print/research-friendly qualitative palette.
@@ -47,6 +47,6 @@ ax.legend()
 ax.grid(True, axis='y', linestyle='--', alpha=0.4)
 
 fig.tight_layout()
-out_path = Path(__file__).parent / 'clip_score_by_prompt.png'
+out_path = Path(__file__).parent.parent / 'images' / 'clip_score_by_prompt.png'
 fig.savefig(out_path, dpi=150)
 print(f'Wrote {out_path}')

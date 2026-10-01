@@ -9,7 +9,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 
-RESULTS_DIR = Path(__file__).parent.parent / 'output_two_stage'
+RESULTS_DIR = Path(__file__).parent.parent.parent / 'output_two_stage'
 MODELS = ['sd-turbo', 'sdxl-turbo', 'dreamshaper-lcm']
 METRICS = ['CLIP score', 'Aesthetic score', 'LPIPS diversity']
 COLORS = {'sd-turbo': '#1B9E77', 'sdxl-turbo': '#D95F02', 'dreamshaper-lcm': '#7570B3'}
@@ -55,6 +55,6 @@ ax.legend()
 ax.grid(True, axis='y', linestyle='--', alpha=0.4)
 
 fig.tight_layout()
-out_path = Path(__file__).parent / 'stage_delta.png'
+out_path = Path(__file__).parent.parent / 'images' / 'stage_delta.png'
 fig.savefig(out_path, dpi=150)
 print(f'Wrote {out_path}')

@@ -2,7 +2,7 @@
 (img2img) call per model, using the exact same settings the two-stage
 benchmark used (num_inference_steps=4, strength=0.8) - so the numbers here
 are directly comparable to that run's median latencies, not an abstract
-per-step estimate. Writes benchmark/plots/flops.json.
+per-step estimate. Writes benchmark/eval_plots/images/flops.json.
 """
 import json
 import sys
@@ -12,7 +12,7 @@ import torch
 from diffusers import AutoPipelineForImage2Image
 from torch.utils.flop_counter import FlopCounterMode
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 from run_benchmark import MODEL_CHOICES, empty_device_cache, load_diffusion_pipeline, select_device
 from run_benchmark_two_stage import DEFAULT_MODELS, REFINEMENT_PROMPT_TEMPLATE, REFINEMENT_STRENGTH
 
@@ -61,7 +61,7 @@ def main():
         del pipeline, img2img_pipeline
         empty_device_cache(device)
 
-    out_path = Path(__file__).parent / 'flops.json'
+    out_path = Path(__file__).parent.parent / 'images' / 'flops.json'
     with open(out_path, 'w') as f:
         json.dump(results, f, indent=2)
     print(f'Wrote {out_path}')

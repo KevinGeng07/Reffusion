@@ -13,9 +13,10 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-PLOTS_DIR = Path(__file__).parent
-RESULTS_CSV = PLOTS_DIR.parent / 'output_two_stage' / 'per_image_results.csv'
-FLOPS_JSON = PLOTS_DIR / 'flops.json'
+EVAL_PLOTS_DIR = Path(__file__).parent.parent
+IMAGES_DIR = EVAL_PLOTS_DIR / 'images'
+RESULTS_CSV = EVAL_PLOTS_DIR.parent / 'output_two_stage' / 'per_image_results.csv'
+FLOPS_JSON = IMAGES_DIR / 'flops.json'
 COLORS = {'sd-turbo': 'tab:blue', 'sdxl-turbo': 'tab:orange', 'dreamshaper-lcm': 'tab:green'}
 MARKERS = {'stage1': 'o', 'stage2': '^'}
 
@@ -77,6 +78,6 @@ stage_handles = [
 ax.legend(handles=model_handles + stage_handles, loc='upper left', title='Color = model, shape = stage')
 
 fig.tight_layout()
-out_path = PLOTS_DIR / 'latency_vs_flops.png'
+out_path = IMAGES_DIR / 'latency_vs_flops.png'
 fig.savefig(out_path, dpi=150)
 print(f'Wrote {out_path}')

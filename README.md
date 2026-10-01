@@ -1,6 +1,6 @@
 # Reffusion
 
-![Stage1 vs stage2 samples](benchmark/plots/cover_image.png)
+![Stage1 vs stage2 samples](benchmark/eval_plots/images/cover_image.png)
 
 Reffusion is a chat style web app for generating images from text prompts. A user creates a chat, picks a diffusion model, and sends prompts. From the second message onward, the previous image can be used as a conditioning input, so a chat becomes a sequence of image edits rather than one shot generations. The backend is a Django REST API with token authentication and per account chat history. The frontend is a small Vue 3 and TypeScript app built with Vite.
 
@@ -69,13 +69,13 @@ The "2-pass" models use image conditioning with the single-pass model output wit
 
 CLIP score by prompt, for the three models that ran the full single stage benchmark on this hardware:
 
-![CLIP score by prompt](benchmark/plots/clip_score_by_prompt.png)
+![CLIP score by prompt](benchmark/eval_plots/images/clip_score_by_prompt.png)
 
 The three models land close together on most prompts. None of them is a clear winner across the board, which on its own is a useful finding: at this size and step count, model choice matters less than the specific prompt being asked.
 
 Median latency against FLOPs per generation pass, for the two stage benchmark:
 
-![Latency vs FLOPs](benchmark/plots/latency_vs_flops.png)
+![Latency vs FLOPs](benchmark/eval_plots/images/latency_vs_flops.png)
 
 FLOPs are measured directly, by wrapping a real generation call in PyTorch's flop counter rather than estimating from parameter counts. Latency tracks compute reasonably well but not perfectly. `sdxl-turbo` sits above where its FLOPs alone would predict, which points at overhead beyond raw floating point operations, likely its two text encoders or how well its particular mix of operations runs on MPS.
 
